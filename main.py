@@ -127,6 +127,44 @@ def settings():
     return render_template("settings.html", logged_in=True)
 
 
+@app.route('/change_password', methods=['POST'])
+@login_required
+def change_password():
+    current_password = request.form.get('current_password')
+    new_password = request.form.get('new_password')
+    confirm_password = request.form.get('confirm_password')
+
+    if not check_password_hash(current_user.password, current_password):
+        flash('Current password is incorrect.')
+        return redirect(url_for('settings'))
+
+    if new_password != confirm_password:
+        flash('New passwords do not match.')
+        return redirect(url_for('settings'))
+
+    if len(new_password) < 7:
+        flash('Your password should be at least 7 characters long.')
+        return redirect(url_for('settings'))
+
+    if not contains_number(new_password):
+        flash('Your password should have at least 1 number.')
+        return redirect(url_for('settings'))
+
+    if not contains_uppercase(new_password):
+        flash('Your password should have at least 1 uppercase letter.')
+        return redirect(url_for('settings'))
+
+    current_user.password = generate_password_hash(
+        new_password,
+        method='pbkdf2:sha256',
+        salt_length=8
+    )
+    db.session.commit()
+
+    flash('Password changed successfully!')
+    return redirect(url_for('settings'))
+
+
 @app.route('/resources')
 def resources():
     suggestions = load_suggestions()
@@ -183,6 +221,7 @@ def show_user_profile(index):
                            btype=suggestion[8],
                            area=suggestion[9],
                            comments=suggestion[10] if len(suggestion) > 10 else [],
+                           resource_likes=suggestion[11] if len(suggestion) > 11 else 0,
                            index=index,
                            logged_in=current_user.is_authenticated,
                            current_user=current_user)
@@ -251,6 +290,25 @@ def like_comment(resource_index, comment_index):
             db.session.commit()
 
     return jsonify({'success': True, 'likes': comment['likes']})
+
+
+@app.route('/like_resource/<int:resource_index>', methods=['POST'])
+def like_resource(resource_index):
+    suggestions = load_suggestions()
+
+    if resource_index < 0 or resource_index >= len(suggestions):
+        return jsonify({'error': 'Resource not found'}), 404
+
+    suggestion = suggestions[resource_index]
+
+    # Ensure the resource has a likes field at index 11
+    if len(suggestion) < 12:
+        suggestion.append(0)
+
+    suggestion[11] = suggestion[11] + 1
+    save_suggestions(suggestions)
+
+    return jsonify({'success': True, 'likes': suggestion[11]})
 
 
 # =============================================================================
