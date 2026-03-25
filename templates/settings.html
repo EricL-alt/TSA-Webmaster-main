@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Settings - City of Miami{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/settings.css') }}" />
+{% endblock %}
+
+{% block content %}
+<div class="settings-page">
+    <h1 class="settings-title">Settings</h1>
+    <div class="settings-card">
+        <h2>Account Information</h2>
+        <p>Manage your account details and preferences here.</p>
+
+        <div class="settings-form-group">
+            <label>Name</label>
+            <input type="text" value="{{ current_user.name }}" disabled>
+        </div>
+
+        <div class="settings-form-group">
+            <label>Email Address</label>
+            <input type="email" value="{{ current_user.email }}" disabled>
+        </div>
+
+        <p style="margin-top: 30px; font-size: 12px; font-style: italic;">
+            idk how to add delete account
+        </p>
+    </div>
+</div>
+{% endblock %}

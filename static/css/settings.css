@@ -1,0 +1,66 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: #f6efea;
+    font-family: Inter, system-ui, sans-serif;
+    color: #4a3f35;
+}
+
+.settings-page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 120px 18px 90px;
+    min-height: 70vh;
+}
+
+.settings-title {
+    font-size: 38px;
+    font-weight: 900;
+    color: #d4b391;
+    margin-bottom: 24px;
+    letter-spacing: 0.05em;
+}
+
+.settings-card {
+    background: #f3eadb;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.settings-card h2 {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    color: #4a3f35;
+}
+
+.settings-card p {
+    font-size: 14px;
+    color: rgba(74, 63, 53, 0.8);
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+.settings-form-group {
+    margin-bottom: 16px;
+}
+
+.settings-form-group label {
+    display: block;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: rgba(74, 63, 53, 0.8);
+}
+
+.settings-form-group input {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px 14px;
+    border-radius: 6px;
+    border: 1px solid rgba(74, 63, 53, 0.2);
+    font-size: 14px;
+}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Events - City of Miami{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/events.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="events-page" id="eventsPage" data-static="{{ url_for('static', filename='') }}">
+
+    <!-- Navigation Bar -->
+    <div class="events-nav">
+        <div class="nav-arrows">
+            <button class="arrow-btn" id="prevBtn" aria-label="Previous week">&#10094;</button>
+            <button class="arrow-btn" id="nextBtn" aria-label="Next week">&#10095;</button>
+        </div>
+        <div class="date-range-bar">
+            <span class="date-range-text" id="dateRangeText"></span>
+            <button class="today-btn" id="todayBtn">TODAY</button>
+            <button class="dropdown-arrow-btn" id="dropdownBtn" aria-label="Open calendar">&#9660;</button>
+        </div>
+    </div>
+
+    <!-- Month Label + Divider -->
+    <div class="month-row">
+        <span class="month-label" id="monthLabel"></span>
+        <div class="month-divider"></div>
+    </div>
+
+    <!-- Events List (rendered by JS) -->
+    <div class="events-list" id="eventsList"></div>
+
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/events.js') }}"></script>
+{% endblock %}

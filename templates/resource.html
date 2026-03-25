@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{title}}</title>
+    <style>
+        /* =========================
+           BASE / RESET
+           ========================= */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background: #f6efea;
+            font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+            color: #113033;
+        }
+
+        body {
+            max-width: 980px;
+            margin: 0 auto;
+            padding: 40px 18px 90px;
+        }
+
+        /* =========================
+           RESOURCE CONTENT CARD
+           ========================= */
+        .resource-content {
+            background: #f3eadb;
+            padding: 28px;
+            border-radius: 6px;
+            box-shadow: 0 10px 20px rgba(0,0,0,.08);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            color: #6fb6bb;
+            margin: 0 0 8px 0;
+            line-height: 1.1;
+        }
+
+        h3 {
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(17,48,51,.6);
+            margin: 0 0 16px 0;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: #6fb6bb;
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            margin-bottom: 18px;
+            text-transform: uppercase;
+        }
+
+        .info-text {
+            font-size: 12px;
+            line-height: 1.55;
+            color: rgba(17,48,51,.75);
+            margin-bottom: 20px;
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 18px;
+            background: #fff;
+            color: #4f9da3;
+            text-decoration: none;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            box-shadow: 0 2px 0 rgba(0,0,0,.10);
+            transition: filter .2s ease;
+        }
+
+        .back-button:hover {
+            filter: brightness(.95);
+        }
+
+        /* =========================
+           COMMENTS SECTION
+           ========================= */
+        .comments-section {
+            background: #fff;
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 8px 18px rgba(0,0,0,.08);
+            border: 2px solid transparent;
+            transition: border-color .25s ease;
+        }
+
+        .comments-header {
+            font-size: 16px;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            color: #113033;
+        }
+
+        /* =========================
+           COMMENT FORM
+           ========================= */
+        .comment-form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            font-weight: 900;
+            color: rgba(17,48,51,.7);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 999px;
+            background: #f3eadb;
+            font-size: 12px;
+            font-family: inherit;
+            color: #113033;
+            box-sizing: border-box;
+            transition: box-shadow .25s ease;
+        }
+
+        .form-group textarea {
+            border-radius: 12px;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(17,48,51,.45);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(111,182,187,.4);
+        }
+
+        .submit-button {
+            padding: 12px 24px;
+            background: #6fb6bb;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s ease;
+        }
+
+        .submit-button:hover {
+            background: #5aa8ad;
+        }
+
+        /* =========================
+           COMMENTS LIST
+           ========================= */
+        .comments-list {
+            margin-top: 28px;
+        }
+
+        .comment {
+            background: #f3eadb;
+            padding: 16px 18px;
+            border-radius: 10px;
+            margin-bottom: 14px;
+            border-left: 4px solid #6fb6bb;
+            transition: box-shadow .25s ease;
+        }
+
+        .comment:hover {
+            box-shadow: 0 6px 14px rgba(0,0,0,.08);
+        }
+
+        .comment-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        .comment-author {
+            font-size: 12px;
+            font-weight: 900;
+            color: #6fb6bb;
+        }
+
+        .comment-timestamp {
+            font-size: 10px;
+            color: rgba(17,48,51,.45);
+        }
+
+        .comment-text {
+            font-size: 12px;
+            color: rgba(17,48,51,.75);
+            line-height: 1.5;
+        }
+
+        .no-comments {
+            text-align: center;
+            color: rgba(17,48,51,.45);
+            padding: 40px 20px;
+            font-size: 12px;
+            font-style: italic;
+        }
+
+        /* =========================
+           LIKE BUTTON (per comment)
+           ========================= */
+        .comment-actions {
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .like-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 12px;
+            background: transparent;
+            border: 1.5px solid #6fb6bb;
+            border-radius: 999px;
+            color: #6fb6bb;
+            font-size: 11px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease;
+            letter-spacing: 0.03em;
+        }
+
+        .like-btn:hover:not(:disabled) {
+            background: #6fb6bb;
+            color: #fff;
+        }
+
+        .like-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .like-btn.liked {
+            background: #6fb6bb;
+            color: #fff;
+        }
+
+        /* =========================
+           MESSAGES
+           ========================= */
+        .error-message {
+            background: #fce8e6;
+            color: #c5221f;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .success-message {
+            background: #e6f4ea;
+            color: #1e8e3e;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            display: none;
+        }
+
+        /* =========================
+           RESPONSIVE
+           ========================= */
+        @media (max-width: 760px) {
+            body {
+                padding: 30px 16px 60px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .resource-content,
+            .comments-section {
+                padding: 20px;
+            }
+
+            .comment-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="resource-content">
+        <h1>{{title}}</h1>
+        {% for i in category %}
+        <div class="category-badge">{{i}}</div>
+        {% endfor %}
+		<div class="category-badge">{{btype}}</div>
+		<div class="category-badge">{{area}}</div>
+        <p class="info-text">{{info}}</p>
+		<p class="info-text">{{address}}</p>
+		<p class="info-text">{{phone}}</p>
+		<p class="info-text">{{email}}</p>
+		<p class="info-text"><a style="color: #4f9da3;" " target="_blank" rel="noopener noreferrer" href={{link}}>{{link}}</a></p>
+        <a href="/resources" class="back-button">← Back to Services</a>
+    </div>
+
+    <div class="comments-section">
+        <h2 class="comments-header">Comments ({{comments|length}})</h2>
+
+        <div class="comment-form">
+            <div class="error-message" id="errorMessage"></div>
+            <div class="success-message" id="successMessage"></div>
+
+            <form id="commentForm">
+                {% if logged_in %}
+                <input type="hidden" id="username" value="{{ current_user.name }}">
+                <div class="form-group">
+                    <label>Commenting as</label>
+                    <p style="margin:0; font-size:12px; font-weight:900; color:#6fb6bb;">{{ current_user.name }}</p>
+                </div>
+                {% else %}
+                <div class="form-group">
+                    <label for="username">Name</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your name (optional)" maxlength="50">
+                </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="comment">Comment</label>
+                    <textarea id="comment" name="comment" placeholder="Write your comment here..." required></textarea>
+                </div>
+                <button type="submit" class="submit-button">Post Comment</button>
+            </form>
+        </div>
+
+        <div class="comments-list" id="commentsList">
+            {% if comments %}
+                {% for comment in comments %}
+                <div class="comment">
+                    <div class="comment-header">
+                        <span class="comment-author">{{comment.username}}</span>
+                        <span class="comment-timestamp">{{comment.timestamp}}</span>
+                    </div>
+                    <div class="comment-text">{{comment.text}}</div>
+                    <div class="comment-actions">
+                        <button class="like-btn"
+                                data-resource-index="{{index}}"
+                                data-comment-index="{{loop.index0}}">
+                            ♥ <span class="like-count">{{comment.likes if comment.likes is defined else 0}}</span>
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <div class="no-comments">No comments yet. Be the first to comment!</div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('commentForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+
+            const errorMsg = document.getElementById('errorMessage');
+            const successMsg = document.getElementById('successMessage');
+            const usernameEl = document.getElementById('username');
+            const username = usernameEl ? usernameEl.value.trim() || 'Anonymous' : 'Anonymous';
+            const comment = document.getElementById('comment').value.trim();
+
+            // Hide previous messages
+            errorMsg.style.display = 'none';
+            successMsg.style.display = 'none';
+
+            if (!comment) {
+                errorMsg.textContent = 'Please enter a comment.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            try {
+                const response = await fetch('/add_comment/{{index}}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        comment: comment
+                    })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    successMsg.textContent = 'Comment posted successfully!';
+                    successMsg.style.display = 'block';
+
+                    // Clear form (only text inputs, not hidden fields)
+                    if (usernameEl && usernameEl.type !== 'hidden') usernameEl.value = '';
+                    document.getElementById('comment').value = '';
+
+                    // Add comment to the list
+                    const commentsList = document.getElementById('commentsList');
+                    const noComments = commentsList.querySelector('.no-comments');
+                    if (noComments) {
+                        noComments.remove();
+                    }
+
+                    const newCommentIndex = commentsList.querySelectorAll('.comment').length;
+                    const newComment = document.createElement('div');
+                    newComment.className = 'comment';
+                    newComment.innerHTML = `
+                        <div class="comment-header">
+                            <span class="comment-author">${data.comment.username}</span>
+                            <span class="comment-timestamp">${data.comment.timestamp}</span>
+                        </div>
+                        <div class="comment-text">${data.comment.text}</div>
+                        <div class="comment-actions">
+                            <button class="like-btn"
+                                    data-resource-index="{{index}}"
+                                    data-comment-index="${newCommentIndex}">
+                                ♥ <span class="like-count">0</span>
+                            </button>
+                        </div>
+                    `;
+                    commentsList.appendChild(newComment);
+                    attachLikeHandler(newComment.querySelector('.like-btn'));
+
+                    // Update comment count in header
+                    const header = document.querySelector('.comments-header');
+                    const currentCount = commentsList.querySelectorAll('.comment').length;
+                    header.textContent = `Comments (${currentCount})`;
+
+                    // Scroll to new comment
+                    newComment.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                } else {
+                    errorMsg.textContent = data.error || 'Failed to post comment.';
+                    errorMsg.style.display = 'block';
+                }
+            } catch (error) {
+                errorMsg.textContent = 'An error occurred. Please try again.';
+                errorMsg.style.display = 'block';
+            }
+        });
+
+        // Like button: sends POST to /like_comment/<resource>/<comment>
+        // Uses localStorage to prevent the same browser from liking twice
+        function attachLikeHandler(btn) {
+            const resourceIndex = btn.getAttribute('data-resource-index');
+            const commentIndex = btn.getAttribute('data-comment-index');
+            const storageKey = `liked_{{index}}_${commentIndex}_{{ current_user.name if logged_in else 'anonymous' }}`;
+
+            if (localStorage.getItem(storageKey)) {
+                btn.disabled = true;
+                btn.classList.add('liked');
+            }
+
+            btn.addEventListener('click', async function () {
+                if (this.disabled) return;
+
+                try {
+                    const response = await fetch(`/like_comment/${resourceIndex}/${commentIndex}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        this.querySelector('.like-count').textContent = data.likes;
+                        this.classList.add('liked');
+                        btn.disabled = true;
+                        localStorage.setItem(storageKey, 'true');
+                    }
+                } catch (err) {
+                    console.error('Like failed:', err);
+                }
+            });
+        }
+
+        document.querySelectorAll('.like-btn').forEach(attachLikeHandler);
+    </script>
+</body>
+</html>

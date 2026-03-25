@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block title %}Safety – City of Miami{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/safety.css') }}" />
+{% endblock %}
+
+{% block content %}
+<main class="safety-page">
+
+  <!-- HERO -->
+  <section class="safety-hero">
+    <h1>SAFETY</h1>
+    <p>Resources and services to help keep our community safe</p>
+  </section>
+
+  <section class="safety-layout">
+
+    <!-- FILTERS -->
+    <aside class="filters">
+      <h3>FILTERS</h3>
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="emergency">Emergency</button>
+      <button class="filter-btn" data-filter="health">Health</button>
+      <button class="filter-btn" data-filter="weather">Weather</button>
+      <button class="filter-btn" data-filter="crime">Crime Prevention</button>
+    </aside>
+
+    <!-- CARDS -->
+    <section class="safety-grid">
+
+      <article class="safety-card" data-category="emergency">
+        <img src="{{ url_for('static', filename='images/safety-911.jpg') }}" alt="">
+        <div class="card-body">
+          <h4>EMERGENCY SERVICES</h4>
+          <p>Immediate help during life-threatening emergencies.</p>
+          <button class="read-more">READ MORE</button>
+          <div class="card-more">
+            Dial 911 for police, fire, or medical emergencies.
+          </div>
+        </div>
+      </article>
+
+      <article class="safety-card" data-category="weather">
+        <img src="{{ url_for('static', filename='images/safety-hurricane.jpg') }}" alt="">
+        <div class="card-body">
+          <h4>HURRICANE PREPAREDNESS</h4>
+          <p>Guidelines to stay safe before, during, and after storms.</p>
+          <button class="read-more">READ MORE</button>
+          <div class="card-more">
+            Evacuation routes, emergency kits, and shelter locations.
+          </div>
+        </div>
+      </article>
+
+      <article class="safety-card" data-category="crime">
+        <img src="{{ url_for('static', filename='images/safety-neighborhood.jpg') }}" alt="">
+        <div class="card-body">
+          <h4>NEIGHBORHOOD WATCH</h4>
+          <p>Community-based crime prevention programs.</p>
+          <button class="read-more">READ MORE</button>
+          <div class="card-more">
+            Learn how to organize and participate in your local watch group.
+          </div>
+        </div>
+      </article>
+
+    </section>
+
+  </section>
+
+</main>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/safety.js') }}"></script>
+{% endblock %}

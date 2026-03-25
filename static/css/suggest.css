@@ -1,0 +1,275 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    background: #f6efea;
+    font-family: Inter, system-ui, sans-serif;
+    color: #4a3f35;
+  }
+  
+  .business-page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 40px 18px 90px;
+  }
+  
+  /* HERO */
+  .business-hero {
+    margin-top: 0px;
+  }
+  
+  .business-hero h1 {
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: .08em;
+    color: #d4b391;
+  }
+
+  .business-hero h2 {
+    font-size: 20px;
+    font-weight: 900;
+    color: rgba(74,63,53,.6);
+  }
+  
+  .business-hero p {
+    font-size: 13px;
+    color: rgba(74,63,53,.6);
+  }
+
+  .business-hero a:focus {
+    outline : none;
+  }
+  
+  /* LAYOUT */
+  .business-layout {
+    display: grid;
+    gap: 30px;
+  }
+  
+  /* FILTERS */
+  .filters h3 {
+    font-size: 12px;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  
+  .filter-btn {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: none;
+    background: #e9dfcf;
+    font-size: 11px;
+    cursor: pointer;
+  }
+  
+  .filter-btn.active {
+    background: #d4b391;
+    color: #fff;
+  }
+  
+  /* GRID */
+  .business-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  
+  /* CARD */
+  .business-card {
+    background: #fff;
+    border-radius: 10px;
+    padding: 18px;
+    border: 2px solid transparent;
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+    transition: all .25s ease;
+  }
+  
+  .business-card:hover {
+    border-color: #d4b391;
+    transform: translateY(-4px);
+  }
+  
+  .business-card h4 {
+    font-size: 13px;
+    font-weight: 900;
+    margin-bottom: 6px;
+  }
+  
+  .business-card p {
+    font-size: 12px;
+    color: #555;
+  }
+  
+  /* READ MORE */
+  .read-more {
+    background: none;
+    border: none;
+    color: #b58c67;
+    font-size: 11px;
+    cursor: pointer;
+    padding: 0;
+    margin-top: 6px;
+  }
+  
+  .card-more {
+    display: none;
+    font-size: 11px;
+    margin-top: 8px;
+  }
+  
+  .card-more ul {
+    padding-left: 16px;
+  }
+  
+  .card-more li {
+    margin-bottom: 6px;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 820px) {
+    .business-layout {
+      grid-template-columns: 1fr;
+    }
+  
+    .business-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+ /* =========================
+           COMMENTS SECTION
+           ========================= */
+        .comments-section {
+            background: #fff;
+            padding: 28px;
+            border-radius: 10px;
+            box-shadow: 0 8px 18px rgba(0,0,0,.08);
+            border: 2px solid transparent;
+            transition: border-color .25s ease;
+        }
+
+        .comments-header {
+            font-size: 16px;
+            font-weight: 900;
+            margin: 0 0 20px 0;
+            color: #4a3f35;
+        }
+
+        /* =========================
+           COMMENT FORM
+           ========================= */
+        .comment-form {
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 14px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 11px;
+            font-weight: 900;
+            color: rgba(74,63,53,.7);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 999px;
+            background: #f3eadb;
+            font-size: 12px;
+            font-family: inherit;
+            color: #4a3f35;
+            box-sizing: border-box;
+            transition: box-shadow .25s ease;
+        }
+
+        .form-group textarea {
+            border-radius: 12px;
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(74,63,53,.45);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(212,179,145,.4);
+        }
+
+        .submit-button {
+            padding: 12px 24px;
+            background: #d4b391;
+            color: #fff;
+            border: none;
+            border-radius: 999px;
+            font-size: 11px;
+            font-weight: 900;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: background .2s ease;
+        }
+
+        .submit-button:hover {
+            background: #c8a581;
+        }
+		
+		/* =========================
+           MESSAGES
+           ========================= */
+        .error-message {
+            background: #fce8e6;
+            color: #c5221f;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            display: none;
+        }
+
+        .success-message {
+            background: #e6f4ea;
+            color: #1e8e3e;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 16px;
+            font-size: 12px;
+            display: none;
+        }
+
+        /* =========================
+           RESPONSIVE
+           ========================= */
+        @media (max-width: 760px) {
+            body {
+                padding: 30px 16px 60px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .resource-content,
+            .comments-section {
+                padding: 20px;
+            }
+
+            .comment-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 4px;
+            }
+        }

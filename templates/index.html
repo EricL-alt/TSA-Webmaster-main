@@ -1,0 +1,261 @@
+{% extends "base.html" %}
+
+
+{% block title %}City of Miami - Welcome{% endblock %}
+
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}" />
+{% endblock %}
+
+
+{% block content %}
+<!-- HERO -->
+<header class="hero">
+  <video autoplay muted loop playsinline class="hero-video">
+    <source src="{{ url_for('static', filename='images/banner.mp4') }}" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <div class="hero__overlay">
+    <div class="hero__content">
+      <div class="hero__subtitle">WELCOME TO THE CITY OF</div>
+      <h1 class="hero__title">MIAMI</h1>
+      <form class="hero__search" action="#" method="get">
+        <input type="text" placeholder="Search for a service or a page" aria-label="Search">
+        <button type="submit" aria-label="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</header>
+
+
+<!-- HIGHLIGHT CAROUSEL -->
+<section class="highlightWrap">
+  <button class="circleArrow circleArrow--left" type="button" aria-label="Previous" data-highlight-prev>
+    <span>‹</span>
+  </button>
+
+
+  <div class="highlight" aria-live="polite">
+    <!-- Slide 1 -->
+    <article class="highlight__slide is-active" data-highlight-slide>
+      <div class="highlight__card">
+        <div class="highlight__left">
+          <img src="{{ url_for('static', filename='images/mh1.png') }}" alt="Highlight image">
+        </div>
+
+
+        <div class="highlight__right">
+          <div class="highlight__title">HIGHLIGHT: THRIVING</div>
+          <div class="highlight__title">MIND SOUTH FLORIDA</div>
+          <div class="highlight__desc">
+            Connects Miami—Dade residents to accessible mental health services,
+            including counseling, crisis support, and education.
+          </div>
+
+
+          <a class="pillBtn" href="/user/{{27}}">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+    </article>
+
+
+    <!-- Slide 2 -->
+    <article class="highlight__slide" data-highlight-slide>
+      <div class="highlight__card">
+        <div class="highlight__left">
+          <img src="{{ url_for('static', filename='images/ed4.webp') }}" alt="Highlight image">
+        </div>
+
+
+        <div class="highlight__right">
+          <div class="highlight__title">HIGHLIGHT: PROJECT</div>
+          <div class="highlight__title">UP-START</div>
+          <div class="highlight__desc">
+            Project UP-START provides education assistance and support to students
+            in unstable housing, preparing them to move on to a brighter future.
+          </div>
+
+
+          <a class="pillBtn" href="/user/{{24}}">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="highlight__slide" data-highlight-slide>
+      <div class="highlight__card">
+        <div class="highlight__left">
+          <img src="{{ url_for('static', filename='images/te1.jpg') }}" alt="Highlight image">
+        </div>
+
+
+        <div class="highlight__right">
+          <div class="highlight__title">HIGHLIGHT: MIAMI</div>
+          <div class="highlight__title">CONNECTED</div>
+          <div class="highlight__desc">
+            Teaches Miami residents how to use technology, provides electronics and internet services
+            to those in need, and assists locals in obtaining jobs in the tech industry.
+          </div>
+
+
+          <a class="pillBtn" href="/user/{{15}}">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+    </article>
+
+
+    <article class="highlight__slide" data-highlight-slide>
+      <div class="highlight__card">
+        <div class="highlight__left">
+          <img src="{{ url_for('static', filename='images/im1.jpg') }}" alt="Highlight image">
+        </div>
+
+
+        <div class="highlight__right">
+          <div class="highlight__title">HIGHLIGHT: MIAMI-DADE OFFICE</div>
+          <div class="highlight__title">OF NEW AMERICANS (ONA)</div>
+          <div class="highlight__desc">
+            A county-run program providing citizenship support, TPS assistance, legal screenings, and immigrant
+            integration services across Miami-Dade County.
+          </div>
+
+
+          <a class="pillBtn" href="/user/{{18}}">
+            LEARN MORE
+          </a>
+        </div>
+      </div>
+    </article>
+
+
+  </div>
+
+
+  </div>
+
+
+  <div class="highlight__dots" data-highlight-dots></div>
+
+
+  <button class="circleArrow circleArrow--right" type="button" aria-label="Next" data-highlight-next>
+    <span>›</span>
+  </button>
+</section>
+
+
+<!-- LOOKING FOR -->
+<section class="diversity">
+  <div class="diversity__art">
+    <img style="transform: scale(2.7, 2.7) translateX(17%) translateY(25%);"
+      src="{{ url_for('static', filename='images/path_v4.png') }}" alt="Diversity illustration" class="diversity_img">
+  </div>
+
+  <!-- STAT: Population -->
+  <div class="stat-block fade-in-item" id="stat-population" style="top: 380px; left: 200px;">
+    <div class="stat-value" data-count="442000" data-prefix="~" data-suffix="" data-format="comma">~442,000</div>
+  </div>
+
+  <!-- STAT: 70% -->
+  <div class="stat-block fade-in-item" id="stat-language" style="top: 370px; right: 300px;">
+    <div class="stat-value" data-count="70" data-prefix="" data-suffix="%">70%</div>
+  </div>
+
+  <!-- STAT: Average Age -->
+  <div class="stat-block fade-in-item" id="stat-age" style="top: 520px; right: 160px;">
+    <div class="stat-value" data-count="40" data-prefix="" data-suffix="">40</div>
+  </div>
+
+  <!-- STAT: Average Temperature -->
+  <div class="stat-block fade-in-item" id="stat-temp" style="top: 600px; right: 40px;">
+    <div class="stat-value" data-count="77" data-prefix="" data-suffix="°F">77°F</div>
+  </div>
+
+  <!-- STAT: Household Income -->
+  <div class="stat-block fade-in-item" id="stat-income" style="top: 760px; right: 20px;">
+    <div class="stat-value stat-value--income">
+      <span class="stat-income-prefix">~$</span><span data-count="49" data-prefix="" data-suffix="">49</span><span
+        class="stat-income-suffix">,000</span>
+    </div>
+  </div>
+
+</section>
+
+
+<section class="looking">
+  <div class="looking__title">YOU MAY BE LOOKING FOR…</div>
+
+
+  <div class="cards">
+    <a class="card" href="{{ url_for('resources') }}">
+      <div class="card__img">
+        <img src="{{ url_for('static', filename='images/he3.jpg') }}" alt="">
+      </div>
+      <div class="card__body">
+        <div class="card__h">City Services</div>
+        <div class="card__p">Find local resources and support.</div>
+      </div>
+      <div class="card__dot" aria-hidden="true">›</div>
+    </a>
+
+
+    <a class="card" href="{{ url_for('about') }}">
+      <div class="card__img">
+        <img src="{{ url_for('static', filename='images/about-side.webp') }}" alt="">
+      </div>
+      <div class="card__body">
+        <div class="card__h">Our Story</div>
+        <div class="card__p">Learn what makes Miami unique.</div>
+      </div>
+      <div class="card__dot" aria-hidden="true">›</div>
+    </a>
+
+
+    <a class="card" href="{{ url_for('suggest') }}">
+      <div class="card__img">
+        <img src="{{ url_for('static', filename='images/miami-image.jpg') }}" alt="">
+      </div>
+      <div class="card__body">
+        <div class="card__h">Suggest a Service</div>
+        <div class="card__p">Share anything we may have missed.</div>
+      </div>
+      <div class="card__dot" aria-hidden="true">›</div>
+    </a>
+  </div>
+</section>
+<p class="diversity-text fade-in-item" style="transform: translateX(6%);">...AND THESE MAKE ONE<br>
+  OF THE MOST DIVERSE<br>
+  CITIES IN THE U.S!</p>
+
+
+<img class="hello fade-in-item" style="transform: translateX(265%) translateY(405%) scale(75%);"
+  src="{{ url_for('static', filename='images/hello1.png') }}">
+<img class="hello fade-in-item" style="transform: translateX(200%) translateY(750%) scale(75%);"
+  src="{{ url_for('static', filename='images/hello2.png') }}">
+<img class="fade-in-item" style="transform: translateX(40%) translateY(220%) scale(75%);"
+  src="{{ url_for('static', filename='images/hello3.png') }}">
+
+
+<div class="diversity-spacer"></div>
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/home.js') }}"></script>
+
+
+{% endblock %}

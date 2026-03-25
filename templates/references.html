@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}References – City of Miami{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/suggest.css') }}" />
+{% endblock %}
+
+{% block content %}
+<main class="business-page">
+
+  <!-- HERO -->
+  <section class="business-hero">
+    <h1>References</h1>
+
+    <a href="{{ url_for('static', filename='files/documentation.pdf') }}" style="text-decoration-color: black;" target="_blank"><h2>Documentation</h2></a>
+
+  
+    <a href="{{ url_for('static', filename='files/works_cited.pdf') }}" style="text-decoration-color: black;" target="_blank"><h2>Works Cited</h2></a>
+	
+	<p>This website was developed with Python Flask. The template/theme used was built by our team.</p>
+  </section>
+
+</main>
+{% endblock %}
+

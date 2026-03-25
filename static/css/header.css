@@ -1,0 +1,161 @@
+/* Header Styles */
+
+.site-header {
+  background: rgba(123, 123, 123, 0.4);
+  /* Semi-transparent background */
+  backdrop-filter: blur(10px);
+  /* Glassmorphism blur effect */
+  -webkit-backdrop-filter: blur(10px);
+  /* Safari support */
+  height: 80px;
+  /* Increased height */
+  position: fixed;
+  /* Sticky header */
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  transition: background 0.3s ease, height 0.3s ease;
+}
+
+/* Scrolled state (optional: can be toggled via JS if we want it to dynamiclaly change) 
+   For now, the request implies it should "go transparent as you go down" which is ambiguous.
+   Usually "go transparent" means it starts solid and becomes transparent, OR it starts transparent and becomes solid.
+   Given "glassy", a semi-transparent state is usually desired always or on scroll.
+   However, the user asked: "make it go transparent as you go down".
+   Interpretation: Starts with some background, becomes MORE transparent? Or starts transparent?
+   Let's assume a nice glassy look by default.
+   Wait, "make it go transparent as you go down".
+   If it's sticky, and goes transparent, content will scroll behind it.
+   Let's implement a class `.header-scrolled` that we can toggle with JS.
+*/
+
+.site-header.scrolled {
+  background: rgba(123, 123, 123, 0.2);
+  /* More transparent on scroll */
+  height: 60px;
+  /* Shrink slightly on scroll */
+}
+
+.header-inner {
+  max-width: 1200px;
+  /* Increased max-width for better layout */
+  margin: 0 auto;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+}
+
+.header-left img {
+  height: 40px;
+  /* Larger logo */
+  transition: height 0.3s ease;
+}
+
+.site-header.scrolled .header-left img {
+  height: 30px;
+  /* Shrink logo on scroll */
+}
+
+.header-nav {
+  display: flex;
+  gap: 30px;
+  /* More space between links */
+}
+
+.header-nav a {
+  color: #fff;
+  font-size: 14px;
+  /* Larger font size */
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s;
+}
+
+.header-nav a:hover {
+  opacity: 0.8;
+}
+
+/* User Dropdown */
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.user-dropdown {
+  position: relative;
+}
+
+.user-dropdown-btn {
+  background: transparent;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background 0.2s ease;
+}
+
+.user-dropdown-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-caret {
+  font-size: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
+  min-width: 160px;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+  overflow: hidden;
+}
+
+.dropdown-menu.is-active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  color: #4a3f35;
+  text-decoration: none;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-menu a:hover {
+  background: #f6efea;
+  color: #d4b391;
+}
+
+.dropdown-menu hr {
+  margin: 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}

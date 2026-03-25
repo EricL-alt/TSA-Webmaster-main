@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Suggestions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+        }
+        h1.page-title {
+            text-align: center;
+            color: #333;
+            margin-bottom: 30px;
+        }
+        #searchBar {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .filter-section {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .filter-section h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #333;
+        }
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+        }
+        .checkbox-item input[type="checkbox"] {
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        .checkbox-item label {
+            cursor: pointer;
+            user-select: none;
+        }
+        .suggestion {
+            background-color: #e3f2fd;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .suggestion:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+        .suggestion h1 {
+            margin-top: 0;
+            font-size: 24px;
+            color: #1976d2;
+        }
+        .suggestion p {
+            margin: 10px 0;
+            color: #555;
+        }
+        .suggestion .category {
+            display: inline-block;
+            background-color: #1976d2;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .suggestion a {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #1976d2;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-top: 10px;
+            transition: background-color 0.2s;
+        }
+        .suggestion a:hover {
+            background-color: #1565c0;
+        }
+        .hidden {
+            display: none;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+            font-style: italic;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1 class="page-title">Browse Suggestions</h1>
+
+    <input type="text" id="searchBar" placeholder="Search suggestions..." onkeyup="filterSuggestions()">
+
+    <div class="filter-section">
+        <h3>Filter by Category</h3>
+        <div class="checkbox-group" id="categoryCheckboxes">
+            {% for i in suggestions %}
+                <div class="checkbox-item">
+                    <input type="checkbox" id="cat-{{i[2]}}" value="{{i[2]}}" onchange="filterSuggestions()" checked>
+                    <label for="cat-{{i[2]}}">{{i[2]}}</label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div id="suggestionsContainer">
+        {% for i in suggestions %}
+            <div class="suggestion" data-category="{{i[2]}}">
+                <h1>{{i[0]}}</h1>
+                <p>{{i[1]}}</p>
+                <span class="category">{{i[2]}}</span>
+                <br>
+                <a href="/user/{{loop.index0}}">View Details & Comments</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div id="noResults" class="no-results hidden">
+        No suggestions match your search criteria.
+    </div>
+
+    <script>
+        // Remove duplicate checkboxes on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const checkboxContainer = document.getElementById('categoryCheckboxes');
+            const categories = new Set();
+            const checkboxItems = checkboxContainer.querySelectorAll('.checkbox-item');
+
+            checkboxItems.forEach(item => {
+                const checkbox = item.querySelector('input');
+                const category = checkbox.value;
+
+                if (categories.has(category)) {
+                    item.remove();
+                } else {
+                    categories.add(category);
+                }
+            });
+        });
+
+        function filterSuggestions() {
+            const searchTerm = document.getElementById('searchBar').value.toLowerCase();
+            const suggestions = document.querySelectorAll('.suggestion');
+            const checkboxes = document.querySelectorAll('#categoryCheckboxes input[type="checkbox"]');
+            const noResults = document.getElementById('noResults');
+
+            // Get selected categories
+            const selectedCategories = new Set();
+            checkboxes.forEach(checkbox => {
+                if (checkbox.checked) {
+                    selectedCategories.add(checkbox.value);
+                }
+            });
+
+            let visibleCount = 0;
+
+            suggestions.forEach(suggestion => {
+                const text = suggestion.textContent.toLowerCase();
+                const category = suggestion.getAttribute('data-category');
+
+                const matchesSearch = text.includes(searchTerm);
+                const matchesCategory = selectedCategories.size === 0 || selectedCategories.has(category);
+
+                if (matchesSearch && matchesCategory) {
+                    suggestion.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    suggestion.classList.add('hidden');
+                }
+            });
+
+            // Show/hide no results message
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

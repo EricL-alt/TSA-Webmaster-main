@@ -1,0 +1,245 @@
+/* =========================
+   GLOBAL NORMALIZATION
+   ========================= */
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: #f6efea;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #4a3f35;
+}
+
+/* =========================
+   PAGE WRAPPER
+   ========================= */
+
+.about-page {
+  background: #f6efea;
+  min-height: 100vh;
+  padding-bottom: 80px;
+}
+
+/* =========================
+   SHARED HEADING STYLE
+   ========================= */
+
+.section-heading {
+  font-size: 22px;
+  font-weight: 800;
+  color: #c9a97a;
+  margin: 0 0 16px 0;
+  line-height: 1.2;
+}
+
+.section-heading .teal {
+  color: #3fc6c6;
+}
+
+.section-heading.right-aligned {
+  text-align: right;
+}
+
+/* =========================
+   SECTION 1 – ABOUT OUR PLAN
+   ========================= */
+
+.plan-section {
+  padding: 100px 18px 32px;
+}
+
+.plan-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Wrapper gives the left border line beside the image */
+.plan-photo-wrap {
+  display: inline-block;
+  width: 82%;
+  margin-left: 0;
+  margin-right: auto;
+  margin-bottom: 18px;
+  border-left: 2px solid #c9a97a;
+  padding-left: 10px;
+}
+
+.plan-photo {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: center;
+  height: 240px;
+}
+
+.plan-steps p {
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 0 0 6px 0;
+}
+
+/* =========================
+   SECTION 2 – WHEN WE PLAN IT RIGHT
+   ========================= */
+
+.right-section {
+  padding: 0 18px 40px;
+}
+
+.right-inner {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+/* Wrapper gives the right border line beside the image */
+.right-photo-wrap {
+  display: block;
+  width: 82%;
+  margin-left: auto;
+  margin-right: 0;
+  margin-bottom: 14px;
+  border-right: 2px solid #c9a97a;
+  padding-right: 10px;
+}
+
+.right-photo {
+  width: 100%;
+  display: block;
+  border-radius: 6px;
+  object-fit: cover;
+  object-position: center;
+  height: 260px;
+}
+
+.section-quote {
+  font-size: 11px;
+  font-style: italic;
+  text-align: right;
+  color: #555;
+  margin: 0;
+  padding-right: 4px;
+}
+
+/* =========================
+   SECTION 3 – NUMBERS
+   ========================= */
+
+.numbers-section {
+  padding: 0 18px 40px;
+}
+
+.numbers-inner {
+  max-width: 640px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: 28px;
+  align-items: start;
+}
+
+/* Left column */
+.numbers-heading {
+  font-size: 18px;
+  margin-bottom: 18px;
+}
+
+.person-block {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Wrapper gives the left border line beside the person image */
+.person-photo-wrap {
+  border-left: 2px solid #c9a97a;
+  padding-left: 10px;
+}
+
+.person-photo {
+  width: 100%;
+  border-radius: 4px;
+  display: block;
+  object-fit: cover;
+  object-position: top;
+  height: 420px;
+}
+
+.person-quote {
+  font-size: 11px;
+  font-style: italic;
+  color: #555;
+  margin: 0;
+}
+
+/* Right column — stats */
+.numbers-right {
+  padding-top: 8px;
+}
+
+.goal-label {
+  font-size: 11px;
+  text-align: right;
+  color: #888;
+  margin: 0 0 10px 0;
+}
+
+.stat-bar-group {
+  margin-bottom: 14px;
+}
+
+.stat-bar-label {
+  font-size: 11px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  color: #4a3f35;
+}
+
+.stat-sub {
+  font-weight: 400;
+  color: #888;
+}
+
+.bar-track {
+  width: 100%;
+  height: 22px;
+  background: #e0d5c8;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.4s ease;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 640px) {
+  .numbers-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .section-heading.right-aligned {
+    text-align: left;
+  }
+
+  .section-quote {
+    text-align: left;
+  }
+
+  .person-photo {
+    height: 300px;
+  }
+
+  .plan-photo-wrap,
+  .right-photo-wrap {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

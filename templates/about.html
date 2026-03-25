@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block title %}About Us – City of Miami{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/about.css') }}" />
+{% endblock %}
+
+{% block content %}
+<main class="about-page">
+
+  <!-- SECTION 1: ABOUT OUR PLAN -->
+  <section class="plan-section">
+    <div class="plan-inner">
+      <h2 class="section-heading">About Our <span class="teal">Plan</span></h2>
+
+      <!-- wrap gives left tan line -->
+      <div class="plan-photo-wrap">
+        <img src="{{ url_for('static', filename='images/about-aerial.jpg') }}" alt="Aerial view of Miami neighborhood"
+          class="plan-photo" />
+      </div>
+
+      <div class="plan-steps">
+        <p><strong>Step 1:</strong> Compile some starting resources for people to discover.</p>
+        <p><strong>Step 2:</strong> Miami residents share new resources through our website.</p>
+        <p><strong>Step 3:</strong> Miami residents become more connected over their shared experiences.</p>
+        <p><strong>Step 4:</strong> People obtain the support they need to better themselves and Miami.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2: WHEN WE PLAN IT RIGHT -->
+  <section class="right-section">
+    <div class="right-inner">
+      <h2 class="section-heading right-aligned">When We Plan It Right</h2>
+
+      <!-- wrap gives right tan line -->
+      <div class="right-photo-wrap">
+        <img src="{{ url_for('static', filename='images/about-seniors.jpg') }}" alt="Group of seniors talking"
+          class="right-photo" />
+      </div>
+
+      <p class="section-quote">
+        "I recovered from losing a leg and I feel really happy now — thank you, Miami!"
+      </p>
+    </div>
+  </section>
+
+  <!-- SECTION 3: WHEN NUMBERS SPEAK LOUDER -->
+  <section class="numbers-section">
+    <div class="numbers-inner">
+
+      <!-- LEFT: person + quote -->
+      <div class="numbers-left">
+        <h2 class="section-heading numbers-heading">
+          When <span class="teal">Numbers<br>Speak Louder</span><br>Than Words
+        </h2>
+        <div class="person-block">
+          <!-- wrap gives left tan line -->
+          <div class="person-photo-wrap">
+            <img src="{{ url_for('static', filename='images/about-person.jpg') }}" alt="Community member"
+              class="person-photo" />
+          </div>
+          <p class="person-quote">
+            "I came from a middle class and worked at McDonald's. I realized how much workers
+            needed a $15 hourly wage, so I let my actions speak."
+          </p>
+        </div>
+      </div>
+
+      <!-- RIGHT: stats (no lines, just bars) -->
+      <div class="numbers-right">
+        <p class="goal-label">Goal: 100%</p>
+
+        <div class="stat-bar-group">
+          <div class="stat-bar-label">89,000 Lives Saved <span class="stat-sub">(120% from 60,000)</span></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 100%; background: #3fc6c6;"></div>
+          </div>
+        </div>
+
+        <div class="stat-bar-group">
+          <div class="stat-bar-label">100,000,000 Millions Donated <span class="stat-sub">(75% from 140,000,000)</span>
+          </div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 75%; background: #3fc6c6;"></div>
+          </div>
+        </div>
+
+        <div class="stat-bar-group">
+          <div class="stat-bar-label">5 Resurrections <span class="stat-sub">(60% from 7)</span></div>
+          <div class="bar-track">
+            <div class="bar-fill" style="width: 60%; background: #3fc6c6;"></div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+{% endblock %}
