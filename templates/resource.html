@@ -270,6 +270,47 @@
         }
 
         /* =========================
+           RESOURCE LIKE BUTTON
+           ========================= */
+        .resource-like-section {
+            margin-top: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .resource-like-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 8px 18px;
+            background: transparent;
+            border: 2px solid #6fb6bb;
+            border-radius: 999px;
+            color: #6fb6bb;
+            font-size: 13px;
+            font-weight: 900;
+            cursor: pointer;
+            transition: background .2s ease, color .2s ease;
+            letter-spacing: 0.03em;
+        }
+
+        .resource-like-btn:hover:not(:disabled) {
+            background: #6fb6bb;
+            color: #fff;
+        }
+
+        .resource-like-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .resource-like-btn.liked {
+            background: #6fb6bb;
+            color: #fff;
+        }
+
+        /* =========================
            MESSAGES
            ========================= */
         .error-message {
@@ -330,7 +371,14 @@
 		<p class="info-text">{{phone}}</p>
 		<p class="info-text">{{email}}</p>
 		<p class="info-text"><a style="color: #4f9da3;" " target="_blank" rel="noopener noreferrer" href={{link}}>{{link}}</a></p>
-        <a href="/resources" class="back-button">← Back to Services</a>
+        <div class="resource-like-section">
+            <button class="resource-like-btn" id="resourceLikeBtn"
+                    data-resource-index="{{index}}">
+                ♥ <span id="resourceLikeCount">{{resource_likes}}</span>
+            </button>
+        </div>
+
+        <a href="/resources" class="back-button" style="margin-top: 18px;">← Back to Services</a>
     </div>
 
     <div class="comments-section">
@@ -506,6 +554,42 @@
         }
 
         document.querySelectorAll('.like-btn').forEach(attachLikeHandler);
+
+        // Resource like button: sends POST to /like_resource/<resource>
+        // Uses localStorage to prevent the same browser/account from liking twice
+        (function() {
+            const btn = document.getElementById('resourceLikeBtn');
+            if (!btn) return;
+
+            const resourceIndex = btn.getAttribute('data-resource-index');
+            const storageKey = `liked_resource_${resourceIndex}_{{ current_user.name if logged_in else 'anonymous' }}`;
+
+            if (localStorage.getItem(storageKey)) {
+                btn.disabled = true;
+                btn.classList.add('liked');
+            }
+
+            btn.addEventListener('click', async function() {
+                if (this.disabled) return;
+
+                try {
+                    const response = await fetch(`/like_resource/${resourceIndex}`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' }
+                    });
+                    const data = await response.json();
+
+                    if (response.ok) {
+                        document.getElementById('resourceLikeCount').textContent = data.likes;
+                        this.classList.add('liked');
+                        this.disabled = true;
+                        localStorage.setItem(storageKey, 'true');
+                    }
+                } catch (err) {
+                    console.error('Resource like failed:', err);
+                }
+            });
+        })();
     </script>
 </body>
 </html>
